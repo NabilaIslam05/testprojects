@@ -3,7 +3,8 @@
 import NavBarCom from "@/components/features/navbar";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Image from "next/image";
+import Link from "next/link";
+import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 interface Rating {
   rate: number;
@@ -45,26 +46,39 @@ const ProductsPage = () => {
   if (error) {
     return <div className="text-center text-red-600 mt-10">Error: {error}</div>;
   }
-
   return (
     <div>
       <NavBarCom />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 m-5 gap-4">
         {products.map((product: Product) => (
-          <div key={product.id} className="bg-white p-4 rounded-md shadow-sm">
-            <Image
-              src={product?.image}
-              width={300}
-              height={600}
-              alt={product?.title}
-              className="w-full h-48 object-cover rounded-md"
-            />
-            <h3 className="text-xl font-semibold mt-4">{product?.title}</h3>
-            <p className="text-gray-600 mt-2">{product?.description}</p>
-            <div className="mt-4 font-semibold text-green-600 text-lg">
-              ${product?.price.toFixed(2)}
-            </div>
-          </div>
+          <Card key={product.id} className="bg-white pb-4 rounded-md shadow-md">
+            <CardBody className="w-full h-48 mb-5  relative">
+              <div className=" overflow-hidden rounded-md">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  width={500}
+                  height={150}
+                  className="object-contain"
+                />
+              </div>
+              <div className="text-xl font-semibold mt-4">{product?.title}</div>
+            </CardBody>
+
+            <CardFooter>
+              <div className="flex justify-between items-center gap-5 px-4 py-2">
+                <div className="mt-4 font-semibold text-green-600 text-lg">
+                  ${product?.price.toFixed(2)}
+                </div>
+                <Link
+                  href={`products/${product?.id}`}
+                  className="h-10 w-24 py-2 px-4 mt-2 bg-green-500 text-white"
+                >
+                  Details
+                </Link>
+              </div>
+            </CardFooter>
+          </Card>
         ))}
       </div>
     </div>
