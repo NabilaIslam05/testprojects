@@ -10,7 +10,9 @@ interface Product {
   title: string;
   price: number;
   description: string;
+  category: string;
   image: string;
+  rate: number;
 }
 
 interface ParamsProps {
@@ -54,7 +56,9 @@ const ProductDetailsPage = ({ params }: ParamsProps) => {
           </div>
           <div className="space-y-4">
             <h1 className="text-3xl font-bold">{product.title}</h1>
-            <p className="text-lg text-gray-600">{product.description}</p>
+            <p className="text-lg text-gray-600">{product?.description}</p>
+            <p className="text-lg text-gray-600">{product?.category}</p>
+            <p className="text-lg text-red-600">{product.rate}</p>
             <div className="text-2xl font-semibold text-green-600">
               ${product.price.toFixed(2)}
             </div>

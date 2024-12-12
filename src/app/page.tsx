@@ -1,10 +1,11 @@
 "use client";
+import NavBarCom from "@/components/features/navbar";
 import React from "react";
 
 const HomePage = () => {
   return (
     <div>
-      <h1>Hello World</h1>
+     <NavBarCom></NavBarCom>
     </div>
   );
 };
